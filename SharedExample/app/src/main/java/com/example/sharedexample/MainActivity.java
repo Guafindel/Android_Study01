@@ -19,5 +19,21 @@ public class MainActivity extends AppCompatActivity {
         edit_save = (EditText)findViewById(R.id.edit_save);
 
         SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+        String value = sharedPreferences.getString("won", "");
+        edit_save.setText(value);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        SharedPreferences sharedPreferences = getSharedPreferences(shared, 0);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String value = edit_save.getText().toString();
+        editor.putString("won", value);
+        editor.commit();
+
     }
 }
